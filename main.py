@@ -7,8 +7,25 @@
 # 4. If subtitle, hard-sub it
 # 5. In future, develop a UI front-end
 
+from imports import *
+
+def videoConvertorCompressor():
+    print("Hello Program:", videoConvertorCompressor.__name__)
+# End of 'def videoConvertorCompressor():'
+
 def main():
-    print("Hello Program")
+    utcTimezone = pytz.utc
+    timeStart = dt.datetime.now(utcTimezone)
+    print("Program {0} started at: {1}".format(videoConvertorCompressor.__name__, 
+                                        timeStart.strftime("%y-%m-%d %H:%M:%S")))
+
+    videoConvertorCompressor()
+    
+    timeEnd = dt.datetime.now(utcTimezone)
+    print("Program {0} ended at: {1}, in {2} seconds".format(videoConvertorCompressor.__name__, 
+                                                                timeEnd.strftime("%y-%m-%d %H:%M:%S"),
+                                                                (timeEnd-timeStart).total_seconds()))
+    del([utcTimezone,timeStart,timeEnd])
 # End of 'def main():'
 
 if __name__ == "__main__":
