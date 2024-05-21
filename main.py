@@ -9,20 +9,16 @@
 
 from imports import *
 
-def videoConvertorCompressor():
-    print("Hello Program:", videoConvertorCompressor.__name__)
-# End of 'def videoConvertorCompressor():'
-
 def main():
     utcTimezone = pytz.utc
     timeStart = dt.datetime.now(utcTimezone)
-    print("Program {0} started at: {1}".format(videoConvertorCompressor.__name__, 
+    print("Program {0} started at: {1}".format(__name__, 
                                         timeStart.strftime("%y-%m-%d %H:%M:%S")))
 
     videoConvertorCompressor()
     
     timeEnd = dt.datetime.now(utcTimezone)
-    print("Program {0} ended at: {1}, in {2} seconds".format(videoConvertorCompressor.__name__, 
+    print("Program {0} ended at: {1}, in {2} seconds".format(   __name__, 
                                                                 timeEnd.strftime("%y-%m-%d %H:%M:%S"),
                                                                 (timeEnd-timeStart).total_seconds()))
     del([utcTimezone,timeStart,timeEnd])
