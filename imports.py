@@ -12,4 +12,4 @@ __all__ = [
     'videoConvertorCompressor'
 ]
 
-print("Imported {0} libraries to run videoConverterCompressor: {1}".format(len(__all__), __all__))
+print("Imported {0} libraries to run {1}: {2}".format(len(__all__),videoConvertorCompressor.__name__,__all__))
