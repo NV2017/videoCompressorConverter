@@ -3,5 +3,6 @@
 from imports import *
 
 def videoConvertorCompressor():
-    print("Hello from inside {0}".format(__name__))
+    # Check Input Output folder structure
+    checkFolderStructureStatus = checkFolderStructure()
 # End of 'def videoConvertorCompressor():'
