@@ -9,7 +9,7 @@ def ifNotFolderThenCreate(_FolderPath: str = None) -> bool: # Sort of private fu
         print("No folder path input to create, file: {0}".format(__name__))
         return True
     # End of 'if _FolderPath == None:'
-
+    
     try:
         if not os.path.exists(_FolderPath):
             os.mkdir(_FolderPath)
@@ -20,6 +20,24 @@ def ifNotFolderThenCreate(_FolderPath: str = None) -> bool: # Sort of private fu
         return True
     except Exception as ifNotFolderThenCreateError:
         print("Error detecting folder path: {0}, file: {1}. Error: {2}".format(_FolderPath, __name__, ifNotFolderThenCreateError))
+
+        tempErrorText = ("{0}_Error: {1}, in detecting folder path: {2}, for file: {3}".format( getGlobalVariables.ifNotFolderThenCreateErrorUID, 
+                                                                                                ifNotFolderThenCreateError,
+                                                                                                _FolderPath,
+                                                                                                __name__))
+        print(tempErrorText)
+
+        tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                        _logFilepath        = getGlobalVariables.errorFilePath,
+                                        _logMessage         = tempErrorText,
+                                        _logFilename        = getGlobalVariables.errorFileName,
+                                        _logFolderStatus    = True,
+                                        _logActionCode      = getGlobalVariables.ifNotFolderThenCreateErrorUID,
+                                        _fromFile           = __name__,
+                                        _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        )
+
         return False
     # End of 'try:'
 # End of 'def ifNotFolderThenCreate(_FolderPath):'
@@ -49,7 +67,24 @@ def mappingFolderStructure(_mapStartFolderPath: str = None, _mapEndFolderPath: s
         # End of 'for dir_, _, files in os.walk(_mapStartFolderPath):'
         return tempEquivalentMapEndFolderPathStatus
     except Exception as mappingFolderStructureError:
-        print("Error mapping folders from: {0} to: {1} file: {2}. Error: {3}".format(_mapStartFolderPath, _mapEndFolderPath, __name__, mappingFolderStructureError))
+        tempErrorText = ("{0}_Error mapping folders from: {1} to: {2} file: {3}. Error: {4}".format(getGlobalVariables.mappingFolderStructureErrorUID, 
+                                                                                                    _mapStartFolderPath,
+                                                                                                    _mapEndFolderPath,
+                                                                                                    __name__, 
+                                                                                                    mappingFolderStructureError))
+        print(tempErrorText)
+
+        tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                        _logFilepath        = getGlobalVariables.errorFilePath,
+                                        _logMessage         = tempErrorText,
+                                        _logFilename        = getGlobalVariables.errorFileName,
+                                        _logFolderStatus    = True,
+                                        _logActionCode      = getGlobalVariables.mappingFolderStructureErrorUID,
+                                        _fromFile           = __name__,
+                                        _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        )
+
         return False
     # End of 'try:'
 # End of 'def mappingFolderStructure(_mapStartFolderPath: str = , _mapEndFolderPath: str = ):'
@@ -61,20 +96,37 @@ def checkFolderStructure(  _mainFolderPath:     str = getGlobalVariables.mainFol
                            _outputFolderPath:   str = getGlobalVariables.outputFolderPath,
                            _logFolderPath:      str = getGlobalVariables.logFolderPath,
                            _errorFolderPath:    str = getGlobalVariables.errorFolderPath) -> bool: 
+    try:
+        # Making overall folders if absent
+        inputFolderPathSetupStatus  = ifNotFolderThenCreate(_FolderPath = _inputFolderPath)
+        outputFolderPathSetupStatus = ifNotFolderThenCreate(_FolderPath = _outputFolderPath)
+        logFolderPathSetupStatus  = ifNotFolderThenCreate(_FolderPath = _logFolderPath)
+        errorFolderPathSetupStatus = ifNotFolderThenCreate(_FolderPath = _errorFolderPath)
 
-    # Making overall folders if absent
-    inputFolderPathSetupStatus  = ifNotFolderThenCreate(_FolderPath = _inputFolderPath)
-    outputFolderPathSetupStatus = ifNotFolderThenCreate(_FolderPath = _outputFolderPath)
-    logFolderPathSetupStatus  = ifNotFolderThenCreate(_FolderPath = _logFolderPath)
-    errorFolderPathSetupStatus = ifNotFolderThenCreate(_FolderPath = _errorFolderPath)
+        presentStatus = inputFolderPathSetupStatus and outputFolderPathSetupStatus
+        mappingFolderStructureStatus = False
+        if presentStatus:
+            mappingFolderStructureStatus = mappingFolderStructure(_mapStartFolderPath = _inputFolderPath, _mapEndFolderPath = _outputFolderPath)
+        # End of 'if presentStatus:'
 
-    presentStatus = inputFolderPathSetupStatus and outputFolderPathSetupStatus
-    mappingFolderStructureStatus = False
-    if presentStatus:
-        mappingFolderStructureStatus = mappingFolderStructure(_mapStartFolderPath = _inputFolderPath, _mapEndFolderPath = _outputFolderPath)
-    # End of 'if presentStatus:'
+        presentStatus = presentStatus and mappingFolderStructureStatus
+        
+        return presentStatus
+    except Exception as checkFolderStructureError:
+        tempErrorText = ("{0}_Unable to finish {1}, error: {2}".format(getGlobalVariables.checkFolderStructureErrorUID, __name__, checkFolderStructureError))
+        print(tempErrorText)
 
-    presentStatus = presentStatus and mappingFolderStructureStatus
-    
-    return presentStatus
+        tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                        _logFilepath        = getGlobalVariables.errorFilePath,
+                                        _logMessage         = tempErrorText,
+                                        _logFilename        = getGlobalVariables.errorFileName,
+                                        _logFolderStatus    = True,
+                                        _logActionCode      = getGlobalVariables.checkFolderStructureErrorUID,
+                                        _fromFile           = __name__,
+                                        _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        )
+        
+        return False
+    # End of 'try:'
 # End of 'def checkFolderStructure():'

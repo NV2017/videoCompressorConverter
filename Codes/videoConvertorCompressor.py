@@ -8,6 +8,18 @@ def videoConvertorCompressor():
         checkFolderStructureStatus = checkFolderStructure()
         print("checkFolderStructureStatus:", checkFolderStructureStatus)
     except Exception as videoConvertorCompressorError:
-        print("Unable to finish {0}, error: {1}".format(__name__, videoConvertorCompressorError))
+        tempErrorText = ("{0}_Unable to finish {1}, error: {2}".format(getGlobalVariables.videoConvertorCompressorErrorUID, __name__, videoConvertorCompressorError))
+        print(tempErrorText)
+
+        tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                        _logFilepath        = getGlobalVariables.errorFilePath,
+                                        _logMessage         = tempErrorText,
+                                        _logFilename        = getGlobalVariables.errorFileName,
+                                        _logFolderStatus    = True,
+                                        _logActionCode      = getGlobalVariables.videoConvertorCompressorErrorUID,
+                                        _fromFile           = __name__,
+                                        _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        )
     # End of 'try:'
 # End of 'def videoConvertorCompressor():'
