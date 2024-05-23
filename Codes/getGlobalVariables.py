@@ -31,8 +31,11 @@ logFilePath = os.path.join(logFolderPath, logFileName)
 errorFileName = dt.datetime.now().strftime("%Y%m%d") + "_Errors" + csvDotExtension
 errorFilePath = os.path.join(errorFolderPath, errorFileName)
 
-acceptedInputVideoFormat = ['.mp4','.avi','.mkv','.flv', '.webm', '.mov']
+outputVideoFormat = ".mp4"
+acceptedInputVideoFormat = [outputVideoFormat,'.avi','.mkv','.flv', '.webm', '.mov']
 subtitleExtention = ".srt"
+latestCodec = "libx265"
+EngSubtitleStr = "ENG hard sub"
 
 videoConvertorCompressorErrorUID                                    = "#000001"
 checkFolderStructureErrorUID                                        = "#000002"
@@ -42,3 +45,4 @@ ifFilesExistInInputFolderErrorUID                                   = "#000005"
 permissionedAbsoluteFilepathsEndWithAppropriateExtensionErrorUID    = "#000006"
 permissionedFFmpegForEachFileErrorUID                               = "#000007"
 generateSubtitleFilePathErrorUID                                    = "#000008"
+generateExpectedOutputPathErrorUID                                  = "#000009"
