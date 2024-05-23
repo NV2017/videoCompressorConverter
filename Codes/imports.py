@@ -10,6 +10,7 @@ from logError import logErrorProgram as logErrorProgram
 from checkFolderStructure import checkFolderStructure as checkFolderStructure
 from statistics import median as median
 from ffmpy import FFmpeg as FFmpeg
+from FFmpy_Codes import permissionedFFmpegForEachFile as permissionedFFmpegForEachFile
 from fileLoopFFMPEGconverterCompressor import fileLoopFFMPEGconverterCompressor as fileLoopFFMPEGconverterCompressor
 from videoConvertorCompressor import videoConvertorCompressor as videoConvertorCompressor
 
@@ -24,6 +25,7 @@ __all__ = [
     'checkFolderStructure',
     'median',
     'FFmpeg',
+    'permissionedFFmpegForEachFile',
     'fileLoopFFMPEGconverterCompressor',
     'videoConvertorCompressor'
 ]

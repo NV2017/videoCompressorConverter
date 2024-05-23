@@ -72,12 +72,13 @@ def permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run:bool = None, _
 
     try:
         absoluteFilepathsEndWithAppropriateExtensionList = absoluteFilepathsEndWithAppropriateExtension(absoluteFilepaths = _absoluteFilepaths, extensionsAllowed = getGlobalVariables.acceptedInputVideoFormat)
-        return True, absoluteFilepathsEndWithAppropriateExtensionList
+        toReturnTrue = len(absoluteFilepathsEndWithAppropriateExtensionList) != 0
+        return toReturnTrue, absoluteFilepathsEndWithAppropriateExtensionList
     except Exception as permissionedAbsoluteFilepathsEndWithAppropriateExtensionError:
-        tempErrorText = ("{0}_Error in detecting any appropriate files from: {1}, file: {2}. Error: {3}".format(_absoluteFilepaths, 
-                                                                                                                _inputFolderPath,
+        tempErrorText = ("{0}_Error in detecting any appropriate files from: {1}, file: {2}. Error: {3}".format(getGlobalVariables.permissionedAbsoluteFilepathsEndWithAppropriateExtensionErrorUID, 
+                                                                                                                getGlobalVariables.inputFolderPath,
                                                                                                                 __name__, 
-                                                                                                                ifFilesExistInInputFolderError))
+                                                                                                                permissionedAbsoluteFilepathsEndWithAppropriateExtensionError))
         print(tempErrorText)
 
         tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
@@ -85,7 +86,7 @@ def permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run:bool = None, _
                                         _logMessage         = tempErrorText,
                                         _logFilename        = getGlobalVariables.errorFileName,
                                         _logFolderStatus    = True,
-                                        _logActionCode      = getGlobalVariables.permissionedAbsoluteFilepathsEndWithAppropriateExtensionError,
+                                        _logActionCode      = getGlobalVariables.permissionedAbsoluteFilepathsEndWithAppropriateExtensionErrorUID,
                                         _fromFile           = __name__,
                                         _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
                                         _type               = getGlobalVariables.errorStr
@@ -110,8 +111,8 @@ def fileLoopFFMPEGconverterCompressor(inputFolderPath: str = None, outputFolderP
     # Filter for absolute filepaths that end with appropriate extension
     permissionedAbsoluteFilepathsEndWithAppropriateExtensionStatus, absoluteFilepathsEndWithAppropriateExtension = permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run = ifFilesExistInTheInputFolderStatus, _absoluteFilepaths = absoluteFilepaths)
 
-    
-    # print("absoluteFilepaths:",absoluteFilepaths)
-    print("To Code")
-    
+    # Start ffmpeg for each file, while checking formats and subtitles
+    permissionedFFmpegForEachFileStartus = permissionedFFmpegForEachFile(_run = permissionedAbsoluteFilepathsEndWithAppropriateExtensionStatus, _absoluteFilepathsEndWithAppropriateExtension = absoluteFilepathsEndWithAppropriateExtension)
+
+    return permissionedFFmpegForEachFileStartus
 # End of 'def fileLoopFFMPEGconverterCompressor():'

@@ -33,9 +33,10 @@ errorFilePath = os.path.join(errorFolderPath, errorFileName)
 
 acceptedInputVideoFormat = ['.mp4','.avi','.mkv','.flv', '.webm', '.mov']
 
-videoConvertorCompressorErrorUID                                = "#000001"
-checkFolderStructureErrorUID                                    = "#000002"
-mappingFolderStructureErrorUID                                  = "#000003"
-ifNotFolderThenCreateErrorUID                                   = "#000004"
-ifFilesExistInInputFolderErrorUID                               = "#000005"
-permissionedAbsoluteFilepathsEndWithAppropriateExtensionError   = "#000006"
+videoConvertorCompressorErrorUID                                    = "#000001"
+checkFolderStructureErrorUID                                        = "#000002"
+mappingFolderStructureErrorUID                                      = "#000003"
+ifNotFolderThenCreateErrorUID                                       = "#000004"
+ifFilesExistInInputFolderErrorUID                                   = "#000005"
+permissionedAbsoluteFilepathsEndWithAppropriateExtensionErrorUID    = "#000006"
+permissionedFFmpegForEachFileErrorUID                               = "#000007"
