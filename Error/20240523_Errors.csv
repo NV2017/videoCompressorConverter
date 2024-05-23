@@ -1,0 +1,11 @@
+YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
+2024-05-23,17:12:45,IST,1716464565,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: name 'os' is not defined"
+2024-05-23,18:36:38,IST,1716469598,#000005,fileLoopFFMPEGconverterCompressor,"#000005_Error in detecting any files from: /home/nv/Desktop/VCCvenv/videoCompressorConverter/Input, file: fileLoopFFMPEGconverterCompressor. Error: name 'directory' is not defined"
+2024-05-23,18:47:22,IST,1716470242,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: cannot unpack non-iterable bool object"
+2024-05-23,18:47:57,IST,1716470277,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: cannot unpack non-iterable bool object"
+2024-05-23,18:49:23,IST,1716470363,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: cannot unpack non-iterable bool object"
+2024-05-23,18:54:14,IST,1716470654,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: cannot unpack non-iterable bool object"
+2024-05-23,19:47:38,IST,1716473858,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: name '_inputFolderPath' is not defined"
+2024-05-23,19:48:08,IST,1716473888,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: name '_inputFolderPath' is not defined"
+2024-05-23,19:51:43,IST,1716474103,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: name '_inputFolderPath' is not defined"
+2024-05-23,20:11:01,IST,1716475261,#000001,videoConvertorCompressor,"#000001_Unable to finish videoConvertorCompressor, error: name 'permissionedFFmpegForEachFileStartus' is not defined"

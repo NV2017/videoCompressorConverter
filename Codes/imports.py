@@ -1,21 +1,30 @@
 # imports.py
 
 import os
+from itertools import compress as compress
+import re
 import datetime as dt
 import pytz
 import getGlobalVariables
 from logError import logErrorProgram as logErrorProgram
-# from logError import ProgramLogRecord as ProgramLogRecord
 from checkFolderStructure import checkFolderStructure as checkFolderStructure
+from statistics import median as median
+from ffmpy import FFmpeg as FFmpeg
+from fileLoopFFMPEGconverterCompressor import fileLoopFFMPEGconverterCompressor as fileLoopFFMPEGconverterCompressor
 from videoConvertorCompressor import videoConvertorCompressor as videoConvertorCompressor
 
 __all__ = [
     'os',
+    'compress',
+    're',
     'dt',
     'pytz',
     'getGlobalVariables',
     'logErrorProgram',
     'checkFolderStructure',
+    'median',
+    'FFmpeg',
+    'fileLoopFFMPEGconverterCompressor',
     'videoConvertorCompressor'
 ]
 

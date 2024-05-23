@@ -35,7 +35,7 @@ def ifNotFolderThenCreate(_FolderPath: str = None) -> bool: # Sort of private fu
                                         _logActionCode      = getGlobalVariables.ifNotFolderThenCreateErrorUID,
                                         _fromFile           = __name__,
                                         _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
-                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        _type               = getGlobalVariables.errorStr
                                         )
 
         return False
@@ -46,8 +46,8 @@ def ifNotFolderThenCreate(_FolderPath: str = None) -> bool: # Sort of private fu
 # Returns False when there is no input provided, False when Error, True when task done
 def mappingFolderStructure(_mapStartFolderPath: str = None, _mapEndFolderPath: str = None):
     if None in [_mapStartFolderPath, _mapEndFolderPath]:
-        if _mapStartFolderPath  == None: print("Blank: {0}, file: {1}".format(_mapStartFolderPath,  __name__))
-        if _mapEndFolderPath    == None: print("Blank: {0}, file: {1}".format(_mapEndFolderPath,    __name__))
+        if _mapStartFolderPath  == None: print("Blank _mapStartFolderPath: {0}, file: {1}"  .format(_mapStartFolderPath,  __name__))
+        if _mapEndFolderPath    == None: print("Blank _mapEndFolderPath:{0}, file: {1}"     .format(_mapEndFolderPath,    __name__))
         return True
     # End of 'if None in [_mapStartFolderPath, _mapEndFolderPath]:'
 
@@ -82,7 +82,7 @@ def mappingFolderStructure(_mapStartFolderPath: str = None, _mapEndFolderPath: s
                                         _logActionCode      = getGlobalVariables.mappingFolderStructureErrorUID,
                                         _fromFile           = __name__,
                                         _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
-                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        _type               = getGlobalVariables.errorStr
                                         )
 
         return False
@@ -124,7 +124,7 @@ def checkFolderStructure(  _mainFolderPath:     str = getGlobalVariables.mainFol
                                         _logActionCode      = getGlobalVariables.checkFolderStructureErrorUID,
                                         _fromFile           = __name__,
                                         _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
-                                        _type               = getGlobalVariables.LogErrorS[0]
+                                        _type               = getGlobalVariables.errorStr
                                         )
         
         return False

@@ -22,7 +22,10 @@ currentDateTime = dt.datetime.now(tz=get_localzone())
 currentTimeZone = currentDateTime.strftime('%Z')
 
 logFileColumns = ['YearMonthDay', 'HourMinuteSecond', 'TimeZone', 'TimeStampUNIX', 'LogActionCode','FromFile', 'Log']
-_typeS = ['error','log']
+
+_typeErrorStr   = 'error'
+_typeLogStr     = 'log'
+_typeS = [_typeErrorStr, _typeLogStr]
 
 def _MissingLogFolderAction(_tempError = "LogEntryFunctionError"):
     tempDatetimeNow = dt.datetime.now().strftime("%Y%m%d%H%M%S")
