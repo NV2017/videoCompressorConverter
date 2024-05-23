@@ -32,6 +32,7 @@ errorFileName = dt.datetime.now().strftime("%Y%m%d") + "_Errors" + csvDotExtensi
 errorFilePath = os.path.join(errorFolderPath, errorFileName)
 
 acceptedInputVideoFormat = ['.mp4','.avi','.mkv','.flv', '.webm', '.mov']
+subtitleExtention = ".srt"
 
 videoConvertorCompressorErrorUID                                    = "#000001"
 checkFolderStructureErrorUID                                        = "#000002"
@@ -40,3 +41,4 @@ ifNotFolderThenCreateErrorUID                                       = "#000004"
 ifFilesExistInInputFolderErrorUID                                   = "#000005"
 permissionedAbsoluteFilepathsEndWithAppropriateExtensionErrorUID    = "#000006"
 permissionedFFmpegForEachFileErrorUID                               = "#000007"
+generateSubtitleFilePathErrorUID                                    = "#000008"
