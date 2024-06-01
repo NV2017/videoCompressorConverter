@@ -12,7 +12,6 @@ def generateSubtitleFilePath(_inputFilePath:str = None, _subtitleExtention:str =
     try:
         # Generate the extention file
         subtitleFilepath = _inputFilePath.rsplit(".",1)[0] + _subtitleExtention
-        print("subtitleFilepath:", subtitleFilepath)
         return True, subtitleFilepath
     except Exception as generateSubtitleFilePathError:
         tempErrorText = ("{0}_Error from: {1}, file: {2}. Error: {3}".format(   getGlobalVariables.generateSubtitleFilePathErrorUID, 
@@ -36,11 +35,16 @@ def generateSubtitleFilePath(_inputFilePath:str = None, _subtitleExtention:str =
     # End of 'try:'
 # End of 'def generateSubtitleFilePath(_input:str = None, _subtitleExtention:str = None):'
 
-def generateExpectedOutputPath(_run:bool = None, _subtitleExists:bool = None, _inputFilePath:str = None):
+def generateExpectedOutputPath( _run:bool = None, _subtitleExists:bool = None, _inputFilePath:str = None, _inputFolderName:str = None, 
+                                _outputFolderName:str = None, _latestCodec:str = None, _outputVideoFormat:str = None):
     if None in [_run, _subtitleExists, _inputFilePath]:
-        if _run             == None: print("Blank: {0}, file: {1}".format(_run,             __name__))
-        if _subtitleExists  == None: print("Blank: {0}, file: {1}".format(_subtitleExists,  __name__))
-        if _inputFilePath   == None: print("Blank: {0}, file: {1}".format(_inputFilePath,   __name__))
+        if _run                 == None: print("Blank: {0}, file: {1}".format(_run,                 __name__))
+        if _subtitleExists      == None: print("Blank: {0}, file: {1}".format(_subtitleExists,      __name__))
+        if _inputFilePath       == None: print("Blank: {0}, file: {1}".format(_inputFilePath,       __name__))
+        if _inputFolderName     == None: print("Blank: {0}, file: {1}".format(_inputFolderName,     __name__))
+        if _outputFolderName    == None: print("Blank: {0}, file: {1}".format(_outputFolderName,    __name__))
+        if _latestCodec         == None: print("Blank: {0}, file: {1}".format(_latestCodec,         __name__))
+        if _outputVideoFormat   == None: print("Blank: {0}, file: {1}".format(_outputVideoFormat,   __name__))
         return False, None
     # End of 'if None in [inputFolderPath, outputFolderPath]:'
 
@@ -50,10 +54,11 @@ def generateExpectedOutputPath(_run:bool = None, _subtitleExists:bool = None, _i
     # End of 'if not _run:'
 
     try:
+        _tempExtension = ", codec {0}{1}".format(_latestCodec,_outputVideoFormat)
         outputFilePath =    (
-                            _inputFilePath.rsplit(".",1)[0] + ", " + getGlobalVariables.EngSubtitleStr + getGlobalVariables.outputVideoFormat
+                            _inputFilePath.replace(_inputFolderName, _outputFolderName).rsplit(".",1)[0] + ", {0},".format(getGlobalVariables.EngSubtitleStr) + "{0}".format(_tempExtension)
                             if _subtitleExists else
-                            _inputFilePath.rsplit(".",1)[0] + getGlobalVariables.outputVideoFormat
+                            _inputFilePath.replace(_inputFolderName, _outputFolderName).rsplit(".",1)[0] + "{0}".format(_tempExtension)
                             )
         return False, outputFilePath
     except Exception as generateExpectedOutputPathError:
@@ -111,19 +116,77 @@ def permissionedFFmpegForEachFile(_run:bool = None, _absoluteFilepathsEndWithApp
             generateSubtitleFilePathStatus, subtitleFilePath = generateSubtitleFilePath(_inputFilePath = item, _subtitleExtention = getGlobalVariables.subtitleExtention)
             
             subtitleExists = os.path.exists(subtitleFilePath) if generateSubtitleFilePathStatus else False
-            print("{0} out of {1}, subtitle file found: {2}".format(runningIndexStr, _absoluteFilepathsEndWithAppropriateExtensionLen, subtitleFilePath)) if subtitleExists else print("{0} out of {1}, subtitle file NOT found for: {2}".format(runningIndexStr, _absoluteFilepathsEndWithAppropriateExtensionLen, item))
+            
+            expectedOutputPathStatus, expectedOutputPath = generateExpectedOutputPath(  _run                = generateSubtitleFilePathStatus, 
+                                                                                        _subtitleExists     = subtitleExists, 
+                                                                                        _inputFilePath      = item,
+                                                                                        _inputFolderName    = getGlobalVariables.inputFolderName,
+                                                                                        _outputFolderName   = getGlobalVariables.outputFolderName,
+                                                                                        _latestCodec        = getGlobalVariables.latestCodec,
+                                                                                        _outputVideoFormat  = getGlobalVariables.outputVideoFormat)
 
-            expectedOutputPathStatus, expectedOutputPath = generateExpectedOutputPath(_run = generateSubtitleFilePathStatus, _subtitleExists = subtitleExists, _inputFilePath = item)
+            print("{0} out of {1}, subtitle file found: {2}".format(runningIndexStr, _absoluteFilepathsEndWithAppropriateExtensionLen, subtitleFilePath)) if subtitleExists else print("{0} out of {1}, subtitle file NOT found for: {2}".format(runningIndexStr, _absoluteFilepathsEndWithAppropriateExtensionLen, item))
             
             if subtitleExists:
                 # ffmpegConvertFileWhenSubtitleExistsStatus = ffmpegConvertFileWhenSubtitleExists()
                 print("Yet to Code subtitleExists")
             else:
-                # ffmpegConvertFileWhenSubtitleNotExistsStatus = ffmpegConvertFileWhenSubtitleNotExists(_inputPath = item, _outputPath = "asdf", _latestCodec = getGlobalVariables.latestCodec)
-                print("Yet to Code NOT subtitleExists")
+                try:
+                    # Convert
+                    ff = FFmpeg(inputs={item: None},
+                                outputs={expectedOutputPath: '-c:v {0}'.format(getGlobalVariables.latestCodec)}
+                                )
+                    tempStartTime = dt.datetime.now()
+                    ff.run()
+
+                    # Deleting input file, if it exists
+                    if os.path.exists(item):
+                        os.remove(item)
+                    # End of 'if os.path.exists(item):'
+                    tempEndTime = dt.datetime.now()
+
+                    tempLogText = ("{0}_Log, converted {1}, to: {2}, in: {3}, in: {4}, at: {5}, in: {6} seconds".format(getGlobalVariables.ConvertNoSubtitleLogUID,
+                                                                                                                        item,
+                                                                                                                        expectedOutputPath,
+                                                                                                                        permissionedFFmpegForEachFile.__name__,
+                                                                                                                        __name__, 
+                                                                                                                        tempEndTime.strftime(getGlobalVariables.datetimePrintFormat),
+                                                                                                                        (tempEndTime-tempStartTime).seconds))
+                    print(tempLogText)
+
+                    tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.logFolderPath,
+                                                    _logFilepath        = getGlobalVariables.logFilePath,
+                                                    _logMessage         = tempLogText,
+                                                    _logFilename        = getGlobalVariables.logFileName,
+                                                    _logFolderStatus    = True,
+                                                    _logActionCode      = getGlobalVariables.ConvertNoSubtitleLogUID,
+                                                    _fromFile           = __name__,
+                                                    _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                                    _type               = getGlobalVariables.logStr
+                                                    )
+                except Exception as ConvertNoSubtitleError:
+                    tempErrorText = ("{0}_Error in converting {1}, to: {2}, in: {3}, in: {4}. Error: {5}".format(   getGlobalVariables.ConvertNoSubtitleErrorUID,
+                                                                                                                    item,
+                                                                                                                    expectedOutputPath,
+                                                                                                                    permissionedFFmpegForEachFile.__name__,
+                                                                                                                    __name__, 
+                                                                                                                    ConvertNoSubtitleError))
+                    print(tempErrorText)
+
+                    tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                                    _logFilepath        = getGlobalVariables.errorFilePath,
+                                                    _logMessage         = tempErrorText,
+                                                    _logFilename        = getGlobalVariables.errorFileName,
+                                                    _logFolderStatus    = True,
+                                                    _logActionCode      = getGlobalVariables.ConvertNoSubtitleErrorUID,
+                                                    _fromFile           = __name__,
+                                                    _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                                    _type               = getGlobalVariables.errorStr
+                                                    )
+                # End of 'try:'
             # End of 'if subtitleExists:'                                                                                           
         # End of 'for i1, item in enumerate(_absoluteFilepathsEndWithAppropriateExtension):'
-        
+
         return True
     except Exception as permissionedFFmpegForEachFileError:
         tempErrorText = ("{0}_Error in {1}, file: {2}. Error: {3}".format(  getGlobalVariables.permissionedFFmpegForEachFileErrorUID,

@@ -57,7 +57,7 @@ def permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run:bool = None, _
     if None in [_run, _absoluteFilepaths]:
         if _run                 == None: print("Blank: _run: {0}, file: {1}"                .format(_run,  __name__))
         if _absoluteFilepaths   == None: print("Blank: _absoluteFilepaths: {0}, file: {1}"  .format(_absoluteFilepaths,    __name__))
-        return True
+        return False, []
     # End of 'if None in [_mapStartFolderPath, _mapEndFolderPath]:'
 
     if not _run:
@@ -97,6 +97,55 @@ def permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run:bool = None, _
 
 # End of 'def permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run:bool = False, _absoluteFilepaths:list = []):'
 
+def _permissionedDeleteEmptyFoldersInInputDirectory(_run:bool = None, _inputFolderPath:str = None):
+    if None in [_run, _inputFolderPath]:
+        if _run                 == None: print("Blank: _run: {0}, file: {1}"                .format(_run,               __name__))
+        if _inputFolderPath     == None: print("Blank: _inputFolderPath: {0}, file: {1}"    .format(_inputFolderPath,   __name__))
+        return False
+    # End of 'if None in [_mapStartFolderPath, _mapEndFolderPath]:'
+
+    # Walk through all subfolders in '_inputFolderPath', delete if they are empty
+    try:
+        _tempFolders = list(os.walk(_inputFolderPath, topdown=True))[1:]
+        _tempFoldersLen = len(_tempFolders)
+        if _tempFoldersLen == 0:
+            print("No empty folders to delete in: {}".format(_inputFolderPath))
+            return True
+        # End of 'if _tempFoldersLen == 0:'
+        _tempFolders.reverse()
+        for index, item in enumerate(_tempFolders):
+            if len(os.listdir(item[0])) == 0:
+                os.rmdir(item[0])
+                print("{0} out of {1}, deleted EMPTY folder: {2}, in: {3}, in: {4}, in: {5}".format(str(index+1), _tempFoldersLen, item[0], _inputFolderPath, _permissionedDeleteEmptyFoldersInInputDirectory.__name__, __name__))
+            else:
+                print("{0} out of {1}, NOT-deleted not-empty folder: {2}, in: {3}, in {4}, in: {5}".format(str(index+1), _tempFoldersLen, item[0], _inputFolderPath, _permissionedDeleteEmptyFoldersInInputDirectory.__name__, __name__))
+            # End of 'if len(os.listdir(item[0])) == 0:'
+        # End of 'for item in _tempFolders:'
+
+        return True
+    except Exception as permissionedDeleteEmptyFoldersInInputDirectoryError:
+        tempErrorText = ("{0}_Error in deleting empty subfolders in: {1}, in: {2}, file: {3}. Error: {4}".format(   getGlobalVariables.permissionedDeleteEmptyFoldersInInputDirectoryErrorUID, 
+                                                                                                                    _inputFolderPath,
+                                                                                                                    _permissionedDeleteEmptyFoldersInInputDirectory.__name__,
+                                                                                                                    __name__, 
+                                                                                                                    permissionedDeleteEmptyFoldersInInputDirectoryError))
+        print(tempErrorText)
+
+        tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                        _logFilepath        = getGlobalVariables.errorFilePath,
+                                        _logMessage         = tempErrorText,
+                                        _logFilename        = getGlobalVariables.errorFileName,
+                                        _logFolderStatus    = True,
+                                        _logActionCode      = getGlobalVariables.permissionedDeleteEmptyFoldersInInputDirectoryErrorUID,
+                                        _fromFile           = __name__,
+                                        _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                        _type               = getGlobalVariables.errorStr
+                                        )
+        return False
+    # End of 'try:'
+    return True
+# End of 'def _permissionedDeleteEmptyFoldersInInputDirectory(_run:bool = None, _inputFolderPath:str = None):'
+
 def fileLoopFFMPEGconverterCompressor(inputFolderPath: str = None, outputFolderPath: str = None):
     if None in [inputFolderPath, outputFolderPath]:
         if inputFolderPath  == None: print("Blank: {0}, file: {1}".format(inputFolderPath,  __name__))
@@ -106,13 +155,15 @@ def fileLoopFFMPEGconverterCompressor(inputFolderPath: str = None, outputFolderP
 
     # Find if files exist in the input folder
     ifFilesExistInTheInputFolderStatus, absoluteFilepaths = ifFilesExistInTheInputFolder(_inputFolderPath = getGlobalVariables.inputFolderPath)
-    print("ifFilesExistInTheInputFolderStatus:", ifFilesExistInTheInputFolderStatus)
-
+    
     # Filter for absolute filepaths that end with appropriate extension
     permissionedAbsoluteFilepathsEndWithAppropriateExtensionStatus, absoluteFilepathsEndWithAppropriateExtension = permissionedAbsoluteFilepathsEndWithAppropriateExtension(_run = ifFilesExistInTheInputFolderStatus, _absoluteFilepaths = absoluteFilepaths)
 
     # Start ffmpeg for each file, while checking formats and subtitles
-    permissionedFFmpegForEachFileStartus = permissionedFFmpegForEachFile(_run = permissionedAbsoluteFilepathsEndWithAppropriateExtensionStatus, _absoluteFilepathsEndWithAppropriateExtension = absoluteFilepathsEndWithAppropriateExtension)
+    permissionedFFmpegForEachFileStatus = permissionedFFmpegForEachFile(_run = permissionedAbsoluteFilepathsEndWithAppropriateExtensionStatus, _absoluteFilepathsEndWithAppropriateExtension = absoluteFilepathsEndWithAppropriateExtension)
 
-    return permissionedFFmpegForEachFileStartus
+    # Delete every empty subdirectory inside 'inputFolderPath'
+    permissionedDeleteEmptyFoldersInInputDirectoryStatus = _permissionedDeleteEmptyFoldersInInputDirectory(_run = permissionedFFmpegForEachFileStatus, _inputFolderPath = inputFolderPath)
+
+    return permissionedDeleteEmptyFoldersInInputDirectoryStatus
 # End of 'def fileLoopFFMPEGconverterCompressor():'
