@@ -35,7 +35,7 @@ outputVideoFormat           = ".mp4"
 acceptedInputVideoFormat    = [outputVideoFormat,'.avi','.mkv','.flv', '.webm', '.mov']
 subtitleExtention           = ".srt"
 latestCodec                 = "libx265"
-EngSubtitleStr              = "ENG hard sub"
+EngSubtitleStr              = "Eng Hard Subbed"
 
 datetimePrintFormat = "%Y-%m-%d %H:%M:%S"
 
@@ -50,5 +50,7 @@ generateSubtitleFilePathErrorUID                                    = "#000008"
 generateExpectedOutputPathErrorUID                                  = "#000009"
 permissionedDeleteEmptyFoldersInInputDirectoryErrorUID              = "#000010"
 ConvertNoSubtitleErrorUID                                           = "#000011"
+ConvertWithSubtitleErrorUID                                         = "#000012"
 
-ConvertNoSubtitleLogUID = "#000001"
+ConvertNoSubtitleLogUID     = "#000001"
+ConvertWithSubtitleLogUID   = "#000002"
