@@ -25,10 +25,10 @@ errorStr    = _typeErrorStr
 logStr      = _typeLogStr
 LogErrorS = [errorStr, logStr]
 
-logFileName = dt.datetime.now().strftime("%Y%m%d") + "_Logs" + csvDotExtension
+logFileName = dt.datetime.now().strftime("%Y%m%d") + "_" + logFolderName + csvDotExtension
 logFilePath = os.path.join(logFolderPath, logFileName)
 
-errorFileName = dt.datetime.now().strftime("%Y%m%d") + "_Errors" + csvDotExtension
+errorFileName = dt.datetime.now().strftime("%Y%m%d") + "_" + ErrorFolderName + csvDotExtension
 errorFilePath = os.path.join(errorFolderPath, errorFileName)
 
 outputVideoFormat           = ".mp4"
@@ -52,5 +52,6 @@ permissionedDeleteEmptyFoldersInInputDirectoryErrorUID              = "#000010"
 ConvertNoSubtitleErrorUID                                           = "#000011"
 ConvertWithSubtitleErrorUID                                         = "#000012"
 
-ConvertNoSubtitleLogUID     = "#000001"
-ConvertWithSubtitleLogUID   = "#000002"
+ConvertNoSubtitleLogUID             = "#000001"
+ConvertWithSubtitleLogUID           = "#000002"
+DeletePreExistingOutputFileLogUID   = "#000003"

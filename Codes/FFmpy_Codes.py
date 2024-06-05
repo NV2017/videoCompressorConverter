@@ -161,14 +161,34 @@ def permissionedFFmpegForEachFile(_run:bool = None, _absoluteFilepathsEndWithApp
 
             print("{0} out of {1}, subtitle file found: {2}".format(runningIndexStr, _absoluteFilepathsEndWithAppropriateExtensionLen, "sub.srt")) if subtitleExists else print("{0} out of {1}, subtitle file NOT found for: {2}".format(runningIndexStr, _absoluteFilepathsEndWithAppropriateExtensionLen, item))
             
-            # Skip if 'expectedOutputPath' exists, delete input file 'item' & '' if 'subtitleExists'
+            # If 'expectedOutputPath' exists, delete it; now the program will convert again. Record this log
+            if os.path.exists(expectedOutputPath):
+                os.remove(expectedOutputPath)
+                tempLogText = ("{0}_Log, deleting existing file: {1}, making: {2}, in: {3}, in: {4}".format(getGlobalVariables.ConvertNoSubtitleLogUID,
+                                                                                                            item,
+                                                                                                            expectedOutputPath,
+                                                                                                            permissionedFFmpegForEachFile.__name__,
+                                                                                                            __name__))
+                print(tempLogText)
+
+                tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.logFolderPath,
+                                                _logFilepath        = getGlobalVariables.logFilePath,
+                                                _logMessage         = tempLogText,
+                                                _logFilename        = getGlobalVariables.logFileName,
+                                                _logFolderStatus    = True,
+                                                _logActionCode      = getGlobalVariables.DeletePreExistingOutputFileLogUID,
+                                                _fromFile           = __name__,
+                                                _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                                _type               = getGlobalVariables.logStr
+                                                )
+            # End of 'if os.path.exists(expectedOutputPath):'
 
             if subtitleExists:
                 try:
-                    tempStartTime = dt.datetime.now()
-                    subtitleFilePathForFFMPY = subtitleFilePath.replace(" ", whiteSpaceReplacer)
+                    tempStartTime               = dt.datetime.now()
+                    subtitleFilePathForFFMPY    = subtitleFilePath.replace(" ", whiteSpaceReplacer)
                     _convertCompressFileWithSubtitles(_inputFilePath = item, _outputFilePath = expectedOutputPath, _latestCodec = getGlobalVariables.latestCodec, _subtitleFilePathForFFMPY = subtitleFilePathForFFMPY)
-                    tempStartTime = dt.datetime.now()
+                    tempEndTime                 = dt.datetime.now()
 
                     tempLogText = ("{0}_Log, converted {1}, to: {2}, in: {3}, in: {4}, at: {5}, in: {6} seconds with subtitles".format( getGlobalVariables.ConvertNoSubtitleLogUID,
                                                                                                                                         item,
@@ -211,17 +231,17 @@ def permissionedFFmpegForEachFile(_run:bool = None, _absoluteFilepathsEndWithApp
                 # End of 'try:'
             else:
                 try:
-                    tempStartTime = dt.datetime.now()
+                    tempStartTime   = dt.datetime.now()
                     _convertCompressFileNoSubtitles(_inputFilePath = item, _outputFilePath = expectedOutputPath, _latestCodec = getGlobalVariables.latestCodec)
-                    tempEndTime = dt.datetime.now()
+                    tempEndTime     = dt.datetime.now()
 
                     tempLogText = ("{0}_Log, converted {1}, to: {2}, in: {3}, in: {4}, at: {5}, in: {6} seconds".format(getGlobalVariables.ConvertNoSubtitleLogUID,
-                                                                                                        _inputFilePath,
-                                                                                                        _outputFilePath,
-                                                                                                        _convertCompressFileNoSubtitles.__name__,
-                                                                                                        __name__, 
-                                                                                                        tempEndTime.strftime(getGlobalVariables.datetimePrintFormat),
-                                                                                                        (tempEndTime-tempStartTime).seconds))
+                                                                                                                        item,
+                                                                                                                        expectedOutputPath,
+                                                                                                                        permissionedFFmpegForEachFile.__name__,
+                                                                                                                        __name__, 
+                                                                                                                        tempEndTime.strftime(getGlobalVariables.datetimePrintFormat),
+                                                                                                                        (tempEndTime-tempStartTime).seconds))
                     print(tempLogText)
 
                     tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.logFolderPath,
