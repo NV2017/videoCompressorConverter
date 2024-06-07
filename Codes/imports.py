@@ -13,6 +13,7 @@ from ffmpy import FFmpeg as FFmpeg
 from FFmpy_Codes import permissionedFFmpegForEachFile as permissionedFFmpegForEachFile
 from fileLoopFFMPEGconverterCompressor import fileLoopFFMPEGconverterCompressor as fileLoopFFMPEGconverterCompressor
 from videoConvertorCompressor import videoConvertorCompressor as videoConvertorCompressor
+import tkinter as tk
 
 __all__ = [
     'os',
@@ -27,7 +28,8 @@ __all__ = [
     'FFmpeg',
     'permissionedFFmpegForEachFile',
     'fileLoopFFMPEGconverterCompressor',
-    'videoConvertorCompressor'
+    'videoConvertorCompressor',
+    'tk'
 ]
 
 print("Imported {0} libraries to run {1}: {2}".format(len(__all__),videoConvertorCompressor.__name__,__all__))

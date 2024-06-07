@@ -55,3 +55,5 @@ ConvertWithSubtitleErrorUID                                         = "#000012"
 ConvertNoSubtitleLogUID             = "#000001"
 ConvertWithSubtitleLogUID           = "#000002"
 DeletePreExistingOutputFileLogUID   = "#000003"
+
+GUItkinterAppName   = "vCC 0.0.1"
