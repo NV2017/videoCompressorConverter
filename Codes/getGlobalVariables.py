@@ -12,18 +12,18 @@ logFolderName       = 'Log'
 ErrorFolderName     = 'Error'
 
 mainCodesFolderPath = os.path.join(os.getcwd(),codesFolderName)
+mainFolderPath      = osSeparator.join(mainCodesFolderPath.split(osSeparator)[0:-1])
 
-mainFolderPath = osSeparator.join(mainCodesFolderPath.split(osSeparator)[0:-1])
-
-inputFolderPath = os.path.join(mainFolderPath, inputFolderName)
-outputFolderPath = os.path.join(mainFolderPath, outputFolderName)
-logFolderPath = os.path.join(mainFolderPath, logFolderName)
-errorFolderPath = os.path.join(mainFolderPath, ErrorFolderName)
+inputFolderPath     = os.path.join(mainFolderPath, inputFolderName)
+outputFolderPath    = os.path.join(mainFolderPath, outputFolderName)
+logFolderPath       = os.path.join(mainFolderPath, logFolderName)
+errorFolderPath     = os.path.join(mainFolderPath, ErrorFolderName)
 
 csvDotExtension = ".csv"
+
 errorStr    = _typeErrorStr
 logStr      = _typeLogStr
-LogErrorS = [errorStr, logStr]
+LogErrorS   = [errorStr, logStr]
 
 logFileName = dt.datetime.now().strftime("%Y%m%d") + "_" + logFolderName + csvDotExtension
 logFilePath = os.path.join(logFolderPath, logFileName)
@@ -53,9 +53,13 @@ ConvertNoSubtitleErrorUID                                           = "#000011"
 ConvertWithSubtitleErrorUID                                         = "#000012"
 GUIstartAppErrorUID                                                 = "#000013"
 setTkFrameNameErrorUID                                              = "#000014"
+setTkAppWindowSizeErrorUID                                          = "#000015"
 
 ConvertNoSubtitleLogUID             = "#000001"
 ConvertWithSubtitleLogUID           = "#000002"
 DeletePreExistingOutputFileLogUID   = "#000003"
 
 GUItkinterAppName   = "vCC 0.0.1"
+GUIscreenWidthMin   = 640
+GUIscreenHeightMin  = 360
+GUIscreenFraction   = 0.25
