@@ -1,4 +1,0 @@
-YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
-2024-06-11,01:24:26,IST,1718049266,#000014,__main__,setTkFrameNameError: pureTkGUIfunctions._setTkFrameName() got an unexpected keyword argument 'name'
-2024-06-11,01:26:20,IST,1718049380,#000015,__main__,setTkAppWindowSizeError: 'MainApplication' object has no attribute '_setTkAppWindowSize'
-2024-06-11,01:27:40,IST,1718049460,#000015,__main__,setTkAppWindowSizeError: Wm.wm_title() got an unexpected keyword argument 'width'

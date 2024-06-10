@@ -11,10 +11,12 @@ from imports import *
 
 class MainApplication():
     def __init__(self, AppName):
-        self.AppName            = AppName
-        self.tkFrameRoot        = tk.Tk()
-        self._setTkFrameName    = pureTkGUIfunctions._setTkFrameName
         self._logErrorProgram   = logErrorProgram
+
+        self.tkFrameRoot    = tk.Tk()
+
+        self.AppName            = AppName        
+        self._setTkFrameName    = pureTkGUIfunctions._setTkFrameName
 
         self.screenWidth    = self.tkFrameRoot.winfo_screenwidth()
         self.screenHeight   = self.tkFrameRoot.winfo_screenheight()
@@ -24,6 +26,15 @@ class MainApplication():
     # End of 'def __init__(self, parent):'
 
     def startApp(self):
+        # Under the hood, the following are components that make the App
+        # This function is not wrapped in try/catch/exception because
+        # Because each of the statements themselves are wrapped in try/catch/exception
+        # The steps are permissioned, i.e. require '_run' to be True
+        # Each step in the sequence below returns Tru/False, depending on it's completion status
+        # Therefore, steps are sequentially run if & only if the previous step an sans error
+        # All errors with unique UIDs are recorded inside the error folder in csv rows, daily new file
+        # Likewise, important logs are also recorded inside the log folder in csv rows, daily new file
+
         # Set Tkinter App Title
         setTkFrameNameStatus = self.setTkFrameName( _run        = True,
                                                     name        = self.AppName,
@@ -91,8 +102,8 @@ class MainApplication():
                 return False
             # End of 'if not _run:'
             
-            tempWidthInt    = min(int(GUIscreenWidth    *screenFraction), GUIscreenWidth)
-            tempHeightInt   = min(int(GUIscreenHeight   *screenFraction), GUIscreenHeight)
+            tempWidthInt    = int(GUIscreenWidth    *screenFraction)
+            tempHeightInt   = int(GUIscreenHeight   *screenFraction)
 
             self._setTkAppWindowSize(tkFrameRoot = self.tkFrameRoot, width = tempWidthInt, height = tempHeightInt)
             
