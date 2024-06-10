@@ -51,6 +51,8 @@ generateExpectedOutputPathErrorUID                                  = "#000009"
 permissionedDeleteEmptyFoldersInInputDirectoryErrorUID              = "#000010"
 ConvertNoSubtitleErrorUID                                           = "#000011"
 ConvertWithSubtitleErrorUID                                         = "#000012"
+GUIstartAppErrorUID                                                 = "#000013"
+setTkFrameNameErrorUID                                              = "#000014"
 
 ConvertNoSubtitleLogUID             = "#000001"
 ConvertWithSubtitleLogUID           = "#000002"

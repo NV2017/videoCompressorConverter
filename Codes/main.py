@@ -9,52 +9,60 @@
 
 from imports import *
 
-# class MainApplication(tk.Frame):
-#     def __init__(self, parent, AppName):
-#         tk.Frame.__init__(self, parent)
-#         self.parent     = parent
-#         self.AppName    = AppName
-#     # End of 'def __init__(self, parent):'
-# # End of 'class MainApplication(tk.Frame):'
-
-
-# if __name__ == "__main__":
-#     root = tk.Tk()
-#     MainApplication(root, AppName="asdf").pack(side="top", fill="both", expand=True)
-#     root.title('PythonGuides')
-#     root.geometry('400x300')
-#     root.mainloop()
-# # End of 'if __name__ == "__main__":'
-
 class MainApplication():
     def __init__(self, AppName):
-        self.AppName        = AppName
-        self.tkFrameRoot    = tk.Tk()        
+        self.AppName            = AppName
+        self.tkFrameRoot        = tk.Tk()
+        self._setTkFrameName    = pureTkGUIfunctions._setTkFrameName
     # End of 'def __init__(self, parent):'
 
     def startApp(self):
         # Set App Title
-        setTkFrameNameStatus = self.setTkFrameName(self.AppName)
+        setTkFrameNameStatus = self.setTkFrameName( name        = self.AppName,
+                                                    _run        = True, 
+                                                    tkFrameRoot = self.tkFrameRoot)
+        print("setTkFrameNameStatus:", setTkFrameNameStatus)
 
-        # Set App Frame size        
+        # Set App Frame size
 
         print("Started")
         self.tkFrameRoot.mainloop()
     # End of 'def startApp(self):'
 
-    def setTkFrameName(self, name):
+    def setTkFrameName( self, _run:bool, name:str, tkFrameRoot):
         try:
-            self._setTkFrameName(name)
+            if None in [_run, name]:
+                if _run == None: print("Blank: _run: {0}, file: {1}, function: {2}".format(_run, __name__, MainApplication.setTkFrameName.__name__))
+                if name == None: print("Blank: name: {0}, file: {1}, function: {2}".format(name, __name__, MainApplication.setTkFrameName.__name__))
+                return False
+            # End of 'if None in [_run, name]:'
+            
+            self._setTkFrameName(name = self.AppName, tkFrameRoot = self.tkFrameRoot)
+            
             return True
         except Exception as setTkFrameNameError:
-            print("setTkFrameNameError:", setTkFrameNameError)
+            tempErrorText = "setTkFrameNameError: {0}".format(setTkFrameNameError)
+
+            print(tempErrorText)
+
+            tempLogError = logErrorProgram (_logFolderPath      = getGlobalVariables.errorFolderPath,
+                                            _logFilepath        = getGlobalVariables.errorFilePath,
+                                            _logMessage         = tempErrorText,
+                                            _logFilename        = getGlobalVariables.errorFileName,
+                                            _logFolderStatus    = True,
+                                            _logActionCode      = getGlobalVariables.setTkFrameNameErrorUID,
+                                            _fromFile           = __name__,
+                                            _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                            _type               = getGlobalVariables.errorStr
+                                            )
+
             return False
         # End of 'try:'
     # End of 'def setTkFrameName(tkFrame, name):'
 
-    def _setTkFrameName(self, name):
-        self.tkFrameRoot.title(name)
-    # End of 'def _setTkFrameName(self, name):'
+    def _logErrorProgram(self):
+        self._logErrorProgramStatus = logErrorProgram()
+    # End of 'def _logErrorProgram(self):
 
 # End of 'class MainApplication(tk.Frame):'
 
