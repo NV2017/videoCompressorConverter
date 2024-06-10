@@ -14,28 +14,34 @@ class MainApplication():
         self.AppName            = AppName
         self.tkFrameRoot        = tk.Tk()
         self._setTkFrameName    = pureTkGUIfunctions._setTkFrameName
+        self.screen_width       = self.tkFrameRoot.winfo_screenwidth()
+        self.screen_height      = self.tkFrameRoot.winfo_screenheight()
     # End of 'def __init__(self, parent):'
 
     def startApp(self):
         # Set App Title
-        setTkFrameNameStatus = self.setTkFrameName( name        = self.AppName,
-                                                    _run        = True, 
+        setTkFrameNameStatus = self.setTkFrameName( _run        = False,
+                                                    name        = self.AppName,
                                                     tkFrameRoot = self.tkFrameRoot)
         print("setTkFrameNameStatus:", setTkFrameNameStatus)
-
-        # Set App Frame size
 
         print("Started")
         self.tkFrameRoot.mainloop()
     # End of 'def startApp(self):'
 
-    def setTkFrameName( self, _run:bool, name:str, tkFrameRoot):
+    def setTkFrameName( self, _run:bool = None, name:str = None, tkFrameRoot = None):
         try:
-            if None in [_run, name]:
-                if _run == None: print("Blank: _run: {0}, file: {1}, function: {2}".format(_run, __name__, MainApplication.setTkFrameName.__name__))
-                if name == None: print("Blank: name: {0}, file: {1}, function: {2}".format(name, __name__, MainApplication.setTkFrameName.__name__))
+            tempInputVariablesStr = "[_run, name, tkFrameRoot]"
+            tempInputVariables = eval(tempInputVariablesStr)
+            if None in tempInputVariables:
+                list(map(lambda item: print("Blank: {0}: {1}, file: {2}, function: {3}".format(tempInputVariablesStr.replace("[","").replace("]","").split(",")[item[0]], item[1], __name__, MainApplication.setTkFrameName.__name__)) if item[1] == None else None, enumerate(tempInputVariables)))
                 return False
             # End of 'if None in [_run, name]:'
+
+            if not _run:
+                print("No permission to run function: {0} in file: {1}, skipping".format(MainApplication.setTkFrameName.__name__, __name__))
+                return False
+            # End of 'if not _run:'
             
             self._setTkFrameName(name = self.AppName, tkFrameRoot = self.tkFrameRoot)
             

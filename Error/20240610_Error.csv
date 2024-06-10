@@ -25,3 +25,4 @@ YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
 2024-06-10,21:48:55,IST,1718036335,#000014,__main__,setTkFrameNameError: 'NoneType' object is not callable
 2024-06-10,21:49:10,IST,1718036350,#000014,__main__,setTkFrameNameError: 'NoneType' object is not callable
 2024-06-10,21:49:22,IST,1718036362,#000014,__main__,setTkFrameNameError: 'NoneType' object is not callable
+2024-06-10,22:54:25,IST,1718040265,#000014,__main__,setTkFrameNameError: 'NoneType' object has no attribute '__name__'
