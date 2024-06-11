@@ -54,6 +54,7 @@ ConvertWithSubtitleErrorUID                                         = "#000012"
 GUIstartAppErrorUID                                                 = "#000013"
 setTkFrameNameErrorUID                                              = "#000014"
 setTkAppWindowSizeErrorUID                                          = "#000015"
+addTkAppMenuBarUID                                                  = "#000016"
 
 ConvertNoSubtitleLogUID             = "#000001"
 ConvertWithSubtitleLogUID           = "#000002"
@@ -63,3 +64,11 @@ GUItkinterAppName   = "vCC 0.0.1"
 GUIscreenWidthMin   = 640
 GUIscreenHeightMin  = 360
 GUIscreenFraction   = 0.25
+
+GUIfileButtonStr    = 'File'
+GUIfolderButtonStr  = 'Folder'
+GUIdarkButtonStr    = 'Dark'
+GUIlightButtonStr   = 'Light'
+GUIexitButtonStr    = 'Exit'
+
+GUImenuButtons = [GUIfileButtonStr, GUIfolderButtonStr, GUIdarkButtonStr, GUIlightButtonStr, GUIexitButtonStr]

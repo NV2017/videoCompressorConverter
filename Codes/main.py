@@ -23,6 +23,10 @@ class MainApplication():
         self.screenFraction = getGlobalVariables.GUIscreenFraction
 
         self._setTkAppWindowSize    = pureTkGUIfunctions._setTkAppWindowSize
+
+        self.MenuBar            = Menu(self.tkFrameRoot)
+        self.GUImenuButtons     = getGlobalVariables.GUImenuButtons
+        self._addTkAppMenuBar   = pureTkGUIfunctions._addTkAppMenuBar
     # End of 'def __init__(self, parent):'
 
     def startApp(self):
@@ -34,6 +38,8 @@ class MainApplication():
         # Therefore, steps are sequentially run if & only if the previous step an sans error
         # All errors with unique UIDs are recorded inside the error folder in csv rows, daily new file
         # Likewise, important logs are also recorded inside the log folder in csv rows, daily new file
+
+        # Theme is added to a simple Menu bar cascade option
 
         # Set Tkinter App Title
         setTkFrameNameStatus = self.setTkFrameName( _run        = True,
@@ -47,6 +53,9 @@ class MainApplication():
                                                             GUIscreenHeight = self.screenHeight,
                                                             screenFraction  = self.screenFraction)
         print("setTkAppWindowSizeStatus:", setTkAppWindowSizeStatus)
+
+        addTkAppMenuBarStatus = self.addTkAppMenuBar(_run   = setTkAppWindowSizeStatus, MenuBar = self.MenuBar, Buttons = self.GUImenuButtons)
+        print("addTkAppMenuBarStatus:", addTkAppMenuBarStatus)
 
         self.tkFrameRoot.mainloop()
     # End of 'def startApp(self):'
@@ -93,7 +102,7 @@ class MainApplication():
             tempInputVariablesStr = "[_run, GUIscreenWidth, GUIscreenHeight, screenFraction]"
             tempInputVariables = eval(tempInputVariablesStr)
             if None in tempInputVariables:
-                list(map(lambda item: print("Blank: {0}: {1}, file: {2}, function: {3}".format(tempInputVariablesStr.replace("[","").replace("]","").split(",")[item[0]], item[1], __name__, MainApplication.setTkFrameName.__name__)) if item[1] == None else None, enumerate(tempInputVariables)))
+                list(map(lambda item: print("Blank: {0}: {1}, file: {2}, function: {3}".format(tempInputVariablesStr.replace("[","").replace("]","").split(",")[item[0]], item[1], __name__, MainApplication.setTkAppWindowSize.__name__)) if item[1] == None else None, enumerate(tempInputVariables)))
                 return False
             # End of 'if None in [_run, name]:'
 
@@ -127,6 +136,43 @@ class MainApplication():
             return False
         # End of 'try:'
     # End of 'def setTkFrameName( self, _run:bool = None, name:str = None, tkFrameRoot = None):'
+
+    def addTkAppMenuBar( self, _run:bool = None, MenuBar = None, Buttons:list = None):
+        try:
+            tempInputVariablesStr = "[_run, MenuBar, Buttons]"
+            tempInputVariables = eval(tempInputVariablesStr)
+            if None in tempInputVariables:
+                list(map(lambda item: print("Blank: {0}: {1}, file: {2}, function: {3}".format(tempInputVariablesStr.replace("[","").replace("]","").split(",")[item[0]], item[1], __name__, MainApplication.addTkAppMenuBar.__name__)) if item[1] == None else None, enumerate(tempInputVariables)))
+                return False
+            # End of 'if None in [_run, name]:'
+
+            if not _run:
+                print("No permission to run function: {0} in file: {1}, skipping".format(MainApplication.addTkAppMenuBar.__name__, __name__))
+                return False
+            # End of 'if not _run:'
+            
+            self._addTkAppMenuBar(tkFrameRoot = self.tkFrameRoot, MenuBar = MenuBar, Buttons = Buttons)
+            
+            return True
+        except Exception as addTkAppMenuBarError:
+            tempErrorText = "addTkAppMenuBarError: {0}".format(addTkAppMenuBarError)
+
+            print(tempErrorText)
+
+            tempLogError = self._logErrorProgram(   _logFolderPath      = getGlobalVariables.errorFolderPath,
+                                                    _logFilepath        = getGlobalVariables.errorFilePath,
+                                                    _logMessage         = tempErrorText,
+                                                    _logFilename        = getGlobalVariables.errorFileName,
+                                                    _logFolderStatus    = True,
+                                                    _logActionCode      = getGlobalVariables.addTkAppMenuBarUID,
+                                                    _fromFile           = __name__,
+                                                    _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                                    _type               = getGlobalVariables.errorStr
+                                                )
+
+            return False
+        # End of 'try:'
+    # End of 'def addTkAppMenuBar( self, _run:bool = None):'
 
 # End of 'class MainApplication(tk.Frame):'
 
