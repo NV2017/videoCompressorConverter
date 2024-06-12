@@ -1,0 +1,24 @@
+YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
+2024-06-13,00:00:44,IST,1718217044,#000016,__main__,addTkAppMenuBarError: name 'OptionStr' is not defined
+2024-06-13,00:10:14,IST,1718217614,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:13:12,IST,1718217792,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:13:22,IST,1718217802,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:13:57,IST,1718217837,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:15:06,IST,1718217906,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:16:49,IST,1718218009,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:17:42,IST,1718218062,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:18:35,IST,1718218115,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:21:32,IST,1718218292,#000017,__main__,addTkAppDemoObjectError: name 'InternalThemeState' is not defined
+2024-06-13,00:22:34,IST,1718218354,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:23:39,IST,1718218419,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:25:59,IST,1718218559,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:26:48,IST,1718218608,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:27:02,IST,1718218622,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:28:20,IST,1718218700,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-13,00:31:05,IST,1718218865,#000017,__main__,addTkAppDemoObjectError: name 'InternalThemeState' is not defined
+2024-06-13,01:38:48,IST,1718222928,#000017,__main__,addTkAppDemoObjectError: '_tkinter.tkapp' object has no attribute 'Label'
+2024-06-13,01:39:28,IST,1718222968,#000017,__main__,addTkAppDemoObjectError: '_tkinter.tkapp' object has no attribute 'Label'
+2024-06-13,02:19:55,IST,1718225395,#000016,__main__,addTkAppMenuBarError: name 'greeting' is not defined
+2024-06-13,02:20:41,IST,1718225441,#000016,__main__,addTkAppMenuBarError: pureTkGUIfunctions._addTkAppMenuBar() missing 1 required positional argument: 'greeting'
+2024-06-13,02:36:04,IST,1718226364,#000016,__main__,addTkAppMenuBarError: pureTkGUIfunctions._addTkAppMenuBar() got an unexpected keyword argument 'DemoObject'
+2024-06-13,02:44:17,IST,1718226857,#000016,__main__,addTkAppMenuBarError: pureTkGUIfunctions._addTkAppMenuBar() missing 1 required positional argument: 'greeting'

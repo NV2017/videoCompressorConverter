@@ -3,6 +3,9 @@
 from imports import *
 
 class pureTkGUIfunctions():
+    global InternalThemeState
+    InternalThemeState = True
+
     def _setTkFrameName(tkFrameRoot, name):
         tkFrameRoot.title(name)
     # End of 'def _setTkFrameName(self, name):'
@@ -11,19 +14,26 @@ class pureTkGUIfunctions():
         tkFrameRoot.geometry('{0}x{1}'.format(width,height))
     # End of 'def _setTkAppWindowSize(tkFrameRoot, width, height):'
 
-    def _switchToDarkTheme(tkFrameRoot = None):
-        tkFrameRoot.config(bg=getGlobalVariables.GUIgrayScaleColorDarkest)   
+    def _switchToDarkTheme(tkFrameRoot = None, InternalThemeState = InternalThemeState, DemoObject = None):
+        tkFrameRoot.config(bg=getGlobalVariables.GUIgrayScaleColorDarkest)
+        DemoObject.config(fg=getGlobalVariables.GUIgrayScaleHighColor, bg=getGlobalVariables.GUIgrayScaleLowColor, font=('Arial', -30))
+        InternalThemeState = True
+        # print("_switchToDarkTheme InternalThemeState:", InternalThemeState)
     # End of 'def _switchToDarkTheme(tkFrameRoot = None):'
 
-    def _switchToLightTheme(tkFrameRoot = None):
-        tkFrameRoot.config(bg=getGlobalVariables.GUIgrayScaleColorLightest)   
+    def _switchToLightTheme(tkFrameRoot = None, InternalThemeState = InternalThemeState, DemoObject = None):
+        tkFrameRoot.config(bg=getGlobalVariables.GUIgrayScaleColorLightest)
+        DemoObject.config(fg=getGlobalVariables.GUIgrayScaleLowColor, bg=getGlobalVariables.GUIgrayScaleHighColor, font=('Arial', -30))
+        InternalThemeState = False
+        # print("_switchToLightTheme InternalThemeState:", InternalThemeState)
     # End of 'def _switchToLightTheme(tkFrameRoot = None):'
 
     def _menuBarButtonsSwitchCreate(tkFrameRoot     = None,
                                     MenuBar         = None,
                                     ButtonsList     = None, 
+                                    DemoObject        = None,
                                     FileStr         = getGlobalVariables.GUIfileButtonStr,
-                                    FolderStr       = getGlobalVariables.GUIfolderButtonStr,
+                                    OptionsStr      = getGlobalVariables.GUIoptionsButtonStr,
                                     ThemeStr        = getGlobalVariables.GUIthemeButtonStr,
                                     ExitStr         = getGlobalVariables.GUIexitButtonStr,
 
@@ -40,7 +50,6 @@ class pureTkGUIfunctions():
                                     GUImidHighColor     = getGlobalVariables.GUIgrayScaleColorDark):
 
         for buttonItem in ButtonsList:
-            print("buttonItem:", buttonItem)
             if buttonItem == FileStr:
                 # Create a Cascade Menu
                 fileMenu = Menu(MenuBar)
@@ -59,26 +68,34 @@ class pureTkGUIfunctions():
                 themeMenu = Menu(themeMenu, tearoff=False)
 
                 # Add a menu item to the cascade
-                themeMenu.add_command(label=ThemeOptions[0], command=lambda: pureTkGUIfunctions._switchToDarkTheme(tkFrameRoot), background=GUImidHighColor, activebackground=GUIdarkestColor, activeforeground=GUIlightestColor, foreground=GUIlightestColor)
-                themeMenu.add_command(label=ThemeOptions[1], command=lambda: pureTkGUIfunctions._switchToLightTheme(tkFrameRoot), background=GUImidLightColor, activebackground=GUIlightestColor, activeforeground=GUIdarkestColor, foreground=GUIdarkestColor)
+                themeMenu.add_command(label=ThemeOptions[0], command=lambda: pureTkGUIfunctions._switchToDarkTheme(tkFrameRoot=tkFrameRoot, DemoObject=DemoObject), background=GUImidHighColor, activebackground=GUIdarkestColor, activeforeground=GUIlightestColor, foreground=GUIlightestColor)
+                themeMenu.add_command(label=ThemeOptions[1], command=lambda: pureTkGUIfunctions._switchToLightTheme(tkFrameRoot=tkFrameRoot, DemoObject=DemoObject), background=GUImidLightColor, activebackground=GUIlightestColor, activeforeground=GUIdarkestColor, foreground=GUIdarkestColor)
 
                 # Add the File menu to the cascade
                 MenuBar.add_cascade(label=ThemeStr, menu=themeMenu)
+            elif buttonItem == OptionsStr:
+                # Create a Cascade Menu
+                optionsMenu = Menu(MenuBar)
+                optionsMenu = Menu(optionsMenu, tearoff=False)
 
-            # elif buttonItem == ExitStr:
-            #     ExitButton = MenuBar.add_command(label=ExitStr, command=tkFrameRoot.destroy)
+                # Add a menu item to the cascade
+                # optionsMenu.add_command(label=OptionsStr, command=tkFrameRoot.destroy)
+
+                # Add the File menu to the cascade
+                MenuBar.add_cascade(label=OptionsStr, menu=optionsMenu)
             else:
-                print("?:")
+                print("? buttonItem:", buttonItem)
         # End of 'for buttonItem in ButtonsList:'
     # End of 'def _menuBarButtonsSwitchCreate(ButtonsList = None):'
 
-    def _addTkAppMenuBar(tkFrameRoot, MenuBar, Buttons, GUIgrayScaleHighColor = getGlobalVariables.GUIgrayScaleHighColor):
+    def _addTkAppMenuBar(tkFrameRoot, MenuBar, Buttons, DemoObject, GUIgrayScaleHighColor = getGlobalVariables.GUIgrayScaleHighColor):
         # Create a Menubar
         tkFrameRoot.config(menu=MenuBar, background=GUIgrayScaleHighColor, cursor='hand2')
-
+        
         # Give function to the buttons
-        pureTkGUIfunctions._menuBarButtonsSwitchCreate(tkFrameRoot = tkFrameRoot, MenuBar = MenuBar, ButtonsList = Buttons)
+        pureTkGUIfunctions._menuBarButtonsSwitchCreate(tkFrameRoot = tkFrameRoot, MenuBar = MenuBar, ButtonsList = Buttons, DemoObject = DemoObject)
 
-        print("Hello from: {0}".format(__name__))
+        # print("_addTkAppMenuBar InternalThemeState:", InternalThemeState)
+        return InternalThemeState
     # End of 'def addTkAppMenuBar(tkFrameRoot):'
 # End of 'class pureTkGUIfunctions():'

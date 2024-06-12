@@ -7,3 +7,5 @@ YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
 2024-06-12,18:47:25,IST,1718198245,#000016,__main__,addTkAppMenuBarError: name 'GUIgrayScaleHighColor' is not defined
 2024-06-12,19:03:22,IST,1718199202,#000016,__main__,"addTkAppMenuBarError: unknown color name ""ffffff"""
 2024-06-12,22:38:32,IST,1718212112,#000016,__main__,"addTkAppMenuBarError: unknown option ""-activebackground"""
+2024-06-12,23:11:00,IST,1718214060,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined
+2024-06-12,23:32:30,IST,1718215350,#000016,__main__,addTkAppMenuBarError: name 'InternalThemeState' is not defined

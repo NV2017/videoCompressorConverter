@@ -54,7 +54,12 @@ class MainApplication():
                                                             screenFraction  = self.screenFraction)
         print("setTkAppWindowSizeStatus:", setTkAppWindowSizeStatus)
 
-        addTkAppMenuBarStatus = self.addTkAppMenuBar(_run   = setTkAppWindowSizeStatus, MenuBar = self.MenuBar, Buttons = self.GUImenuButtons)
+        # Add a DemoObject
+        addTkAppDemoObjectStatus, DemoObject = self.addTkAppDemoObject(_run = setTkAppWindowSizeStatus, InternalThemeState = True)
+        print("addTkAppDemoObjectStatus:", addTkAppDemoObjectStatus)
+
+        # Add Menubar
+        addTkAppMenuBarStatus, addTkAppMenuBarInternalThemeState = self.addTkAppMenuBar(_run = addTkAppDemoObjectStatus, MenuBar = self.MenuBar, Buttons = self.GUImenuButtons, DemoObject = DemoObject)
         print("addTkAppMenuBarStatus:", addTkAppMenuBarStatus)
 
         self.tkFrameRoot.mainloop()
@@ -137,9 +142,52 @@ class MainApplication():
         # End of 'try:'
     # End of 'def setTkFrameName( self, _run:bool = None, name:str = None, tkFrameRoot = None):'
 
-    def addTkAppMenuBar( self, _run:bool = None, MenuBar = None, Buttons:list = None):
+    def addTkAppDemoObject( self, _run:bool = None, InternalThemeState:bool = None):
         try:
-            tempInputVariablesStr = "[_run, MenuBar, Buttons]"
+            tempInputVariablesStr = "[_run, InternalThemeState]"
+            tempInputVariables = eval(tempInputVariablesStr)
+            if None in tempInputVariables:
+                list(map(lambda item: print("Blank: {0}: {1}, file: {2}, function: {3}".format(tempInputVariablesStr.replace("[","").replace("]","").split(",")[item[0]], item[1], __name__, MainApplication.addTkAppDemoObject.__name__)) if item[1] == None else None, enumerate(tempInputVariables)))
+                return False
+            # End of 'if None in [_run, name]:'
+
+            if not _run:
+                print("No permission to run function: {0} in file: {1}, skipping".format(MainApplication.addTkAppDemoObject.__name__, __name__))
+                return False
+            # End of 'if not _run:'
+
+            # self._addTkAppDemoObject(tkFrameRoot = self.tkFrameRoot)
+            # print("addTkAppDemoObject InternalThemeState:", InternalThemeState)
+            DemoObject = Label(text="Demo Button")
+            tempColor = "yellow" if InternalThemeState else "green"
+            print("addTkAppDemoObject InternalThemeState: {0}, tempColor:{1}".format(InternalThemeState, tempColor))
+            DemoObject.config(fg=tempColor)
+            DemoObject.pack()
+            
+            return True, DemoObject
+        except Exception as addTkAppDemoObjectError:
+            tempErrorText = "addTkAppDemoObjectError: {0}".format(addTkAppDemoObjectError)
+
+            print(tempErrorText)
+
+            tempLogError = self._logErrorProgram(   _logFolderPath      = getGlobalVariables.errorFolderPath,
+                                                    _logFilepath        = getGlobalVariables.errorFilePath,
+                                                    _logMessage         = tempErrorText,
+                                                    _logFilename        = getGlobalVariables.errorFileName,
+                                                    _logFolderStatus    = True,
+                                                    _logActionCode      = getGlobalVariables.addTkAppDemoObjectErrorUID,
+                                                    _fromFile           = __name__,
+                                                    _crticalErrorPath   = getGlobalVariables.mainCodesFolderPath,
+                                                    _type               = getGlobalVariables.errorStr
+                                                )
+
+            return False
+        # End of 'try:'
+    # End of 'def addTkAppMenuBar( self, _run:bool = None):'
+
+    def addTkAppMenuBar( self, _run:bool = None, MenuBar = None, Buttons:list = None, DemoObject = None):
+        try:
+            tempInputVariablesStr = "[_run, MenuBar, Buttons, DemoObject]"
             tempInputVariables = eval(tempInputVariablesStr)
             if None in tempInputVariables:
                 list(map(lambda item: print("Blank: {0}: {1}, file: {2}, function: {3}".format(tempInputVariablesStr.replace("[","").replace("]","").split(",")[item[0]], item[1], __name__, MainApplication.addTkAppMenuBar.__name__)) if item[1] == None else None, enumerate(tempInputVariables)))
@@ -151,9 +199,10 @@ class MainApplication():
                 return False
             # End of 'if not _run:'
 
-            self._addTkAppMenuBar(tkFrameRoot = self.tkFrameRoot, MenuBar = MenuBar, Buttons = Buttons)
+            addTkAppMenuBarInternalThemeState = self._addTkAppMenuBar(tkFrameRoot = self.tkFrameRoot, MenuBar = MenuBar, Buttons = Buttons, DemoObject = DemoObject)
+            # print("addTkAppMenuBar addTkAppMenuBarInternalThemeState:", addTkAppMenuBarInternalThemeState)
             
-            return True
+            return True, addTkAppMenuBarInternalThemeState
         except Exception as addTkAppMenuBarError:
             tempErrorText = "addTkAppMenuBarError: {0}".format(addTkAppMenuBarError)
 
@@ -172,7 +221,7 @@ class MainApplication():
 
             return False
         # End of 'try:'
-    # End of 'def addTkAppMenuBar( self, _run:bool = None):'
+    # End of 'def addTkAppMenuBar( self, _run:bool = None):'    
 
 # End of 'class MainApplication(tk.Frame):'
 

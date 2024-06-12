@@ -14,6 +14,7 @@ from FFmpy_Codes import permissionedFFmpegForEachFile as permissionedFFmpegForEa
 from fileLoopFFMPEGconverterCompressor import fileLoopFFMPEGconverterCompressor as fileLoopFFMPEGconverterCompressor
 from videoConvertorCompressor import videoConvertorCompressor as videoConvertorCompressor
 import tkinter as tk
+from tkinter import Label as Label
 from tkinter import Menu as Menu
 from pureTkGUIfunctions import pureTkGUIfunctions as pureTkGUIfunctions
 
@@ -32,6 +33,7 @@ __all__ = [
     'fileLoopFFMPEGconverterCompressor',
     'videoConvertorCompressor',
     'tk',
+    'Label',
     'Menu',
     'pureTkGUIfunctions'
 ]

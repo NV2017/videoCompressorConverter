@@ -55,6 +55,7 @@ GUIstartAppErrorUID                                                 = "#000013"
 setTkFrameNameErrorUID                                              = "#000014"
 setTkAppWindowSizeErrorUID                                          = "#000015"
 addTkAppMenuBarUID                                                  = "#000016"
+addTkAppDemoObjectErrorUID                                          = "#000017"
 
 ConvertNoSubtitleLogUID             = "#000001"
 ConvertWithSubtitleLogUID           = "#000002"
@@ -66,6 +67,7 @@ GUIscreenHeightMin  = 360
 GUIscreenFraction   = 0.25
 
 GUIfileButtonStr    = 'File'
+GUIoptionsButtonStr = 'Options'
 GUIfolderButtonStr  = 'Folder'
 GUIthemeButtonStr   = 'Theme'
 GUIexitButtonStr    = 'Exit'
@@ -73,7 +75,7 @@ GUIexitButtonStr    = 'Exit'
 GUIthemeDarkButtonStr   = 'Dark'
 GUIthemeLightButtonStr  = 'Light'
 
-GUImenuButtons          = [GUIfileButtonStr, GUIfolderButtonStr, GUIthemeButtonStr, GUIexitButtonStr]
+GUImenuButtons          = [GUIfileButtonStr, GUIoptionsButtonStr, GUIthemeButtonStr]
 GUIthemeButtonOptions   = [GUIthemeDarkButtonStr, GUIthemeLightButtonStr]
 
 GUIgrayScaleColorDarkest    = "#000000"
