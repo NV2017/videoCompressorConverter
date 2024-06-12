@@ -3,3 +3,7 @@ YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
 2024-06-12,00:56:38,IST,1718133998,#000016,__main__,addTkAppMenuBarError: 'MainApplication' object has no attribute 'tk'
 2024-06-12,01:18:15,IST,1718135295,#000016,__main__,addTkAppMenuBarError: name 'root' is not defined
 2024-06-12,01:32:17,IST,1718136137,#000016,__main__,addTkAppMenuBarError: name 'root' is not defined
+2024-06-12,18:38:10,IST,1718197690,#000016,__main__,addTkAppMenuBarError: name '_switchToDarkTheme' is not defined
+2024-06-12,18:47:25,IST,1718198245,#000016,__main__,addTkAppMenuBarError: name 'GUIgrayScaleHighColor' is not defined
+2024-06-12,19:03:22,IST,1718199202,#000016,__main__,"addTkAppMenuBarError: unknown color name ""ffffff"""
+2024-06-12,22:38:32,IST,1718212112,#000016,__main__,"addTkAppMenuBarError: unknown option ""-activebackground"""

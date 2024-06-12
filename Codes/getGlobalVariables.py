@@ -72,7 +72,27 @@ GUIexitButtonStr    = 'Exit'
 
 GUIthemeDarkButtonStr   = 'Dark'
 GUIthemeLightButtonStr  = 'Light'
-GUIactiveButtonColorStr = "yellow"
 
 GUImenuButtons          = [GUIfileButtonStr, GUIfolderButtonStr, GUIthemeButtonStr, GUIexitButtonStr]
 GUIthemeButtonOptions   = [GUIthemeDarkButtonStr, GUIthemeLightButtonStr]
+
+GUIgrayScaleColorDarkest    = "#000000"
+GUIgrayScaleColorDark       = "#333333"
+GUIgrayScaleColorMid        = "#757575"
+GUIgrayScaleColorLight      = "#CCCCCC"
+GUIgrayScaleColorLightest   = "#ffffff"
+
+GUIthemeToggleState = True  # True means Dark Theme, this is the starting start, can be used to read from file, thus remember past history
+if GUIthemeToggleState:
+    GUIgrayScaleHighColor       = GUIgrayScaleColorDarkest
+    GUIgrayScaleMidHighColor    = GUIgrayScaleColorDark
+    GUIgrayScaleMidMidColor     = GUIgrayScaleColorMid
+    GUIgrayScaleMidLowColor     = GUIgrayScaleColorLight
+    GUIgrayScaleLowColor        = GUIgrayScaleColorLightest
+else:
+    GUIgrayScaleHighColor       = GUIgrayScaleColorLightest
+    GUIgrayScaleMidHighColor    = GUIgrayScaleColorLight
+    GUIgrayScaleMidMidColor     = GUIgrayScaleColorMid
+    GUIgrayScaleMidLowColor     = GUIgrayScaleColorDark
+    GUIgrayScaleLowColor        = GUIgrayScaleColorDarkest
+# End of 'if GUIthemeToggleState:'
