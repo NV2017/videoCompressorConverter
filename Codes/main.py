@@ -150,7 +150,7 @@ class MainApplication():
                 print("No permission to run function: {0} in file: {1}, skipping".format(MainApplication.addTkAppMenuBar.__name__, __name__))
                 return False
             # End of 'if not _run:'
-            
+
             self._addTkAppMenuBar(tkFrameRoot = self.tkFrameRoot, MenuBar = MenuBar, Buttons = Buttons)
             
             return True

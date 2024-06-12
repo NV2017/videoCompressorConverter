@@ -1,0 +1,5 @@
+YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
+2024-06-12,00:54:45,IST,1718133885,#000016,__main__,addTkAppMenuBarError: name 'self' is not defined
+2024-06-12,00:56:38,IST,1718133998,#000016,__main__,addTkAppMenuBarError: 'MainApplication' object has no attribute 'tk'
+2024-06-12,01:18:15,IST,1718135295,#000016,__main__,addTkAppMenuBarError: name 'root' is not defined
+2024-06-12,01:32:17,IST,1718136137,#000016,__main__,addTkAppMenuBarError: name 'root' is not defined

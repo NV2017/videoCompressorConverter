@@ -1,0 +1,5 @@
+YearMonthDay,HourMinuteSecond,TimeZone,TimeStampUNIX,LogActionCode,FromFile,Log
+2024-06-11,22:41:06,IST,1718125866,#000016,__main__,addTkAppMenuBarError: 'NoneType' object has no attribute 'pack'
+2024-06-11,22:41:18,IST,1718125878,#000016,__main__,"addTkAppMenuBarError: can't pack "".!menu"": it's a top-level window"
+2024-06-11,22:44:40,IST,1718126080,#000016,__main__,addTkAppMenuBarError: name '_LightButtonClick' is not defined
+2024-06-11,22:45:02,IST,1718126102,#000016,__main__,addTkAppMenuBarError: name 'self' is not defined

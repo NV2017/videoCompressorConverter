@@ -67,8 +67,12 @@ GUIscreenFraction   = 0.25
 
 GUIfileButtonStr    = 'File'
 GUIfolderButtonStr  = 'Folder'
-GUIdarkButtonStr    = 'Dark'
-GUIlightButtonStr   = 'Light'
+GUIthemeButtonStr   = 'Theme'
 GUIexitButtonStr    = 'Exit'
 
-GUImenuButtons = [GUIfileButtonStr, GUIfolderButtonStr, GUIdarkButtonStr, GUIlightButtonStr, GUIexitButtonStr]
+GUIthemeDarkButtonStr   = 'Dark'
+GUIthemeLightButtonStr  = 'Light'
+GUIactiveButtonColorStr = "yellow"
+
+GUImenuButtons          = [GUIfileButtonStr, GUIfolderButtonStr, GUIthemeButtonStr, GUIexitButtonStr]
+GUIthemeButtonOptions   = [GUIthemeDarkButtonStr, GUIthemeLightButtonStr]
